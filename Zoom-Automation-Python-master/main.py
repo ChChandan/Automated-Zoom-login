@@ -1,57 +1,59 @@
-import subprocess
+
 import pyautogui
+import subprocess
+import datetime
 import time
-import pandas as pd
-from datetime import datetime
+import csv
 
-def sign_in(meetingid, pswd):
-    #Opens up the zoom app
-    #change the path specific to your computer
-    #use \\ in windows to avoid the unicode error
-    subprocess.call("")
+def loginzoom(id,password):
+    subprocess.call("C:\\Users\\Lenovo\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe")
+    while True:
+        join1 = pyautogui.locateOnScreen('join1.png')
+        if join1 != None:
+            pyautogui.click(join1)
+            print("Clicked Join 1")
+            break
+        else:
+            print("Could not find join 1")
+            time.sleep(2)
 
-    time.sleep(10)
-    
-    #clicks the join button
-    join_btn = pyautogui.locateCenterOnScreen('join_button.png')
-    pyautogui.moveTo(join_btn)
-    pyautogui.click()
+    while True:
+        
+        field = pyautogui.locateOnScreen('field1.png')
+        if field != None:
+          
+            print("Made the Input field active")
+            pyautogui.write(id)
+            pyautogui.click(pyautogui.locateOnScreen('join2.png'))
+            break
+        else:
+            print("Could not find the input field")
+            time.sleep(2)
 
-    # Type the meeting ID
-    meeting_id_btn =  pyautogui.locateCenterOnScreen('meeting_id_button.png')
-    pyautogui.moveTo(meeting_id_btn)
-    pyautogui.click()
-    pyautogui.write(meetingid)
+    while True:
+        field2 = pyautogui.locateOnScreen('field2.png')
+        if field2 != None:
+     
+            print("Made the Input field 2 active")
+            pyautogui.write(password)
+            pyautogui.click(pyautogui.locateOnScreen('join3.png'))
+            break
+        else:
+            print("Could not find the input field 2")
+            time.sleep(2)
 
 
-
-    # Hits the join button
-    join_btn = pyautogui.locateCenterOnScreen('join_btn.png')
-    pyautogui.moveTo(join_btn)
-    pyautogui.click()
-    
-    time.sleep(5)
-    #Types the password and hits enter
-    meeting_pswd_btn = pyautogui.locateCenterOnScreen('meeting_pswd.png')
-    pyautogui.moveTo(meeting_pswd_btn)
-    pyautogui.click()
-    pyautogui.write(pswd)
-    pyautogui.press('enter')
-
-# Reading the file
-df = pd.read_csv('timings.csv')
 
 while True:
-    # checking of the current time exists in our csv file
-    now = datetime.now().strftime("%A,%H:%M")
-    print(now)
+    now = datetime.datetime.now()
+    nowtime=now.strftime("%A:%H:%M")
+    #print (nowtime)
+    with open('timings.csv','r') as f:
+        csv_reader=csv.reader(f)
+        for line in csv_reader:
+            if(nowtime==line[0]):
+                meetingid=line[1]
+                password=line[2]
+                loginzoom(meetingid,password)
+                
 
-    if now in str(df['timings']):
-
-       row = df.loc[df['timings'] == now]
-       m_id = str(row.iloc[0,1])
-       m_pswd = str(row.iloc[0,2])
-
-       sign_in(m_id, m_pswd)
-       time.sleep(40)
-       print('signed in')
