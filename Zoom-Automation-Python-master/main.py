@@ -7,9 +7,8 @@ from datetime import datetime
 def sign_in(meetingid, pswd):
     #Opens up the zoom app
     #change the path specific to your computer
-    
-   
-    subprocess.call(["/usr/bin/open", "/Applications/zoom.us.app"])
+    #use \\ in windows to avoid the unicode error
+    subprocess.call("")
 
     time.sleep(10)
     
@@ -24,12 +23,7 @@ def sign_in(meetingid, pswd):
     pyautogui.click()
     pyautogui.write(meetingid)
 
-    # Disables both the camera and the mic
-    media_btn = pyautogui.locateAllOnScreen('media_btn.png')
-    for btn in media_btn:
-        pyautogui.moveTo(btn)
-        pyautogui.click()
-        time.sleep(2)
+
 
     # Hits the join button
     join_btn = pyautogui.locateCenterOnScreen('join_btn.png')
