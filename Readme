@@ -2,4 +2,9 @@ This python app automates the Zoom login process
 
 Make sure to install pyautogui before you execute the main.py which allows to track the buttons and textfield on screen
 
+The readcsv file is to retrieve the data from the csv file that you have provided
+
+Always upload the data of your class details in this format:-
+Day:hour:minute,meeting ID,meeting password,
+
 Don't worry it might take few seconds delay before pressing the buttons as it needs to go through every pixel on screen to find what you need
