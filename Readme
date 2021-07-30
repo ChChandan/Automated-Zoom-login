@@ -1,0 +1,5 @@
+This python app automates the Zoom login process
+
+Make sure to install pyautogui before you execute the main.py which allows to track the buttons and textfield on screen
+
+Don't worry it might take few seconds delay before pressing the buttons as it needs to go through every pixel on screen to find what you need
