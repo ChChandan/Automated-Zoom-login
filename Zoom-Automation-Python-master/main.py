@@ -6,7 +6,9 @@ import time
 import csv
 
 def loginzoom(id,password):
-    subprocess.call("C:\\Users\\Lenovo\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe")
+    #fill in the location of your zoom.exe file 
+    #make sure to add \\ instead of \ to avoid the unicode error
+    subprocess.call("")
     while True:
         join1 = pyautogui.locateOnScreen('join1.png')
         if join1 != None:
