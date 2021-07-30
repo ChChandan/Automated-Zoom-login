@@ -49,7 +49,9 @@ df = pd.read_csv('timings.csv')
 
 while True:
     # checking of the current time exists in our csv file
-    now = datetime.now().strftime("%H:%M")
+    now = datetime.now().strftime("%A,%H:%M")
+    print(now)
+
     if now in str(df['timings']):
 
        row = df.loc[df['timings'] == now]
